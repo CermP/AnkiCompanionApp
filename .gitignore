@@ -1,43 +1,39 @@
 # Xcode
-#
-# gitignore contributors: scroll below to merge yours and make OS X-specific edits
-
 build/
 DerivedData/
 *.hmap
 *.ipa
 *.xcuserstate
+xcuserdata/
 
 # MacOS
-#
 .DS_Store
+
 # AppCode
 .idea/
 
 # Swift Package Manager
-#
-# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
-# Packages/
-# Package.pins
-# Package.resolved
 .build/
 
 # Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts/
 Carthage/Build/
 
 # Accio dependency management
 .accio/
 
 # fastlane
-#
-# It is recommended to not store the screenshots in the repo instead use id of your app
 # fastlane/screenshots/
 # fastlane/test_output/
 
 # Code Injection
-#
-# After developer finishes with debugging he should remove the InjectionIII target and cleanup Project settings
 InjectionIII/
+
+# Python
+__pycache__/
+*.pyc
+
+# PyInstaller (Windows build artifacts)
+*.spec
+dist/
+windows_app/dist/
+windows_app/build/

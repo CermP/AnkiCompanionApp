@@ -1,0 +1,71 @@
+name: Build Release Assets
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  # ── Windows (.exe) ──
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pyinstaller
+
+      - name: Build executable
+        working-directory: windows_app
+        run: |
+          python -m PyInstaller --onefile --windowed --name AnkiCompanion anki_companion.py
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: windows_app/dist/AnkiCompanion.exe
+
+  # ── macOS (.app Universal Binary) ──
+  build-macos:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Universal Binary
+        run: |
+          xcodebuild \
+            -project AnkiCompanionApp/AnkiCompanionApp.xcodeproj \
+            -scheme AnkiCompanionApp \
+            -configuration Release \
+            -archivePath $RUNNER_TEMP/AnkiCompanionApp.xcarchive \
+            -destination "generic/platform=macOS" \
+            ARCHS="x86_64 arm64" \
+            ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            archive
+
+      - name: Export .app from archive
+        run: |
+          APP_PATH="$RUNNER_TEMP/AnkiCompanionApp.xcarchive/Products/Applications/AnkiCompanionApp.app"
+          cd $(dirname "$APP_PATH")
+          zip -r "$RUNNER_TEMP/AnkiCompanionApp-macOS.zip" "AnkiCompanionApp.app"
+
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ runner.temp }}/AnkiCompanionApp-macOS.zip
