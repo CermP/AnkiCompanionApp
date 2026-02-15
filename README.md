@@ -19,7 +19,7 @@ Conçue pour faciliter la contribution au projet [anki-ptsi](https://github.com/
 
 ## 🛠️ Prérequis
 
-- **macOS** (Intel ou Apple Silicon)
+- **macOS** (Intel ou Apple Silicon) ou **Windows**
 - **Anki** (desktop) ouvert en arrière-plan
 - **[AnkiConnect](https://ankiweb.net/shared/info/2055492159)** (add-on Anki n°`2055492159`)
 - **Python 3** installé (`/opt/homebrew/bin/python3` ou `/usr/local/bin/python3`)
