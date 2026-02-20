@@ -2,7 +2,7 @@
 import SwiftUI
 
 @main
-struct AnkiCompanionApp: App {
+struct CardsCompanionApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

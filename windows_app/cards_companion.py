@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AnkiCompanion — Cross-platform GUI for exporting Anki decks to CSV + media.
+CardsCompanion — Cross-platform GUI for exporting Anki decks to CSV + media.
 Works on Windows, macOS, and Linux. Requires Python 3 + tkinter.
 Anki must be running with AnkiConnect add-on active.
 """
@@ -156,7 +156,7 @@ def export_deck(deck_name, output_base_dir, media_base_dir, log_fn=print):
 # GUI Application
 # ──────────────────────────────────────────────
 
-class AnkiCompanionApp:
+class CardsCompanionApp:
     def __init__(self, root):
         self.root = root
         self.root.title(APP_TITLE)
@@ -371,7 +371,7 @@ def main():
     y = (root.winfo_screenheight() // 2) - (h // 2)
     root.geometry(f"{w}x{h}+{x}+{y}")
 
-    app = AnkiCompanionApp(root)
+    app = CardsCompanionApp(root)
     root.mainloop()
 
 
